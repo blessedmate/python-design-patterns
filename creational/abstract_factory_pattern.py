@@ -1,0 +1,42 @@
+class Dog:
+    def speak(self):
+        return "Woof!"
+
+    def __str__(self) -> str:
+        return "Dog"
+
+
+class DogFactory:
+    def get_pet(self):
+        """Returns Dog object"""
+        return Dog()
+
+    def get_food(self):
+        """Returns Dog food object"""
+        return "Dog Food!"
+
+
+class PetStore:
+    """Class that houses the Abstract Factory"""
+
+    def __init__(self, pet_factory=None):
+        """pet_factory is the Abstract Factory"""
+        self._pet_factory = pet_factory
+
+    def show_pet(self):
+        """Utility method to display details of the objects returned"""
+        pet = self._pet_factory.get_pet()
+        pet_food = self._pet_factory.get_food()
+
+        print("Pet:", pet)
+        print("Pet food:", pet_food)
+
+
+# Create a Concrete Factory
+factory = DogFactory()
+
+# Create a pet store housing the abstract factory
+shop = PetStore(factory)
+
+# Invoke the utility method to show the details of our pet
+shop.show_pet()
